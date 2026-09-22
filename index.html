@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  // 动态设置 base：仅当部署在 /nz-trip/ 子路径（如 GitHub Pages 项目页）时才加前缀，
+  // 预览环境/自定义域名部署在根路径时不加，避免图片等相对资源 404。
+  (function(){
+    var seg = location.pathname.split('/').filter(Boolean)[0];
+    if (seg === 'nz-trip') {
+      var b = document.createElement('base');
+      b.href = '/nz-trip/';
+      document.head.appendChild(b);
+    }
+  })();
+</script>
 <title>新西兰10天南岛自驾 · 国庆深度游</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -629,7 +641,7 @@
 
   /* ========== 交通规则页 ========== */
   .drive-video{
-    display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center;
+    display:block;
     background:var(--card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
     border-radius:18px;padding:22px;box-shadow:var(--shadow);border:1px solid var(--glass-border);margin-bottom:24px;
   }
@@ -667,11 +679,11 @@
   }
   .drule:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
   .drule-img{display:block;width:100%;height:170px;object-fit:cover;background-color:#E5E7EB}
-  .drule-body{padding:18px 20px;position:relative}
+  .drule-body{padding:26px 20px 18px;position:relative}
   .drule-no{
-    position:absolute;top:-22px;right:16px;width:44px;height:44px;border-radius:12px;
+    position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:11px;
     background:linear-gradient(135deg,var(--lake),var(--lake-deep));color:#fff;
-    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
     box-shadow:0 6px 16px rgba(14,165,233,.35);
   }
   .drule-body h3{font-size:17px;color:var(--ink);margin-bottom:8px;padding-right:40px}
@@ -1983,7 +1995,6 @@
 
   <!-- 图文导语卡 -->
   <div class="drive-video">
-    <img class="drive-hero-img" src="assets/drive-hero.png" alt="新西兰南岛自驾公路风光" loading="lazy">
     <div class="video-note">
       <h3>🎬 出发前必读 · 官方权威资料</h3>
       <p>新西兰道路多为双向单车道、弯多路窄、天气多变。以下要点依据 <b>新西兰交通局（NZTA）</b> 官方《在新西兰驾车》指南整理。建议先浏览官方页面并下载中文版 PDF 手册，再上路。</p>
@@ -2000,7 +2011,7 @@
     <div class="drive-media-video">
       <h3>🎬 新手上路视频讲解</h3>
       <div class="video-frame">
-        <iframe src="//player.bilibili.com/player.html?bvid=BV1qD421n74D&page=1&autoplay=0&high_quality=1" scrolling="no" frameborder="0" framespacing="0" allowfullscreen="true"></iframe>
+        <iframe src="//player.bilibili.com/player.html?bvid=BV1dT42117R6&page=1&autoplay=0&high_quality=1" scrolling="no" frameborder="0" framespacing="0" allowfullscreen="true"></iframe>
       </div>
       <p style="font-size:13px;color:var(--gray);margin-top:10px">出发前花几分钟看完这段新西兰自驾讲解，直观了解靠左行驶、环岛让行与单车道桥等易错点。</p>
     </div>
@@ -2016,7 +2027,6 @@
   <!-- 六大核心规则卡片 -->
   <div class="drive-rules">
     <div class="drule">
-      <img class="drule-img" src="assets/drive-01-keepleft.png" alt="靠左行驶" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">01</span>
         <h3>⬅️ 全程靠左行驶</h3>
@@ -2024,7 +2034,6 @@
       </div>
     </div>
     <div class="drule">
-      <img class="drule-img" src="assets/drive-02-giveway.png" alt="环岛让行" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">02</span>
         <h3>🔄 让行：让右为主</h3>
@@ -2032,7 +2041,6 @@
       </div>
     </div>
     <div class="drule">
-      <img class="drule-img" src="assets/drive-03-bridge.png" alt="单车道桥" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">03</span>
         <h3>🌉 单车道桥要看箭头</h3>
@@ -2040,7 +2048,6 @@
       </div>
     </div>
     <div class="drule">
-      <img class="drule-img" src="assets/drive-04-snow.png" alt="山路与冰雪路段" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">04</span>
         <h3>❄️ 山路与冰雪路段</h3>
@@ -2048,7 +2055,6 @@
       </div>
     </div>
     <div class="drule">
-      <img class="drule-img" src="assets/drive-05-speed.png" alt="限速标志" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">05</span>
         <h3>🐢 不超速也不龟速</h3>
@@ -2056,7 +2062,6 @@
       </div>
     </div>
     <div class="drule">
-      <img class="drule-img" src="assets/drive-06-fatigue.png" alt="防疲劳休息区" loading="lazy">
       <div class="drule-body">
         <span class="drule-no">06</span>
         <h3>😴 防疲劳 · 严禁酒驾</h3>
